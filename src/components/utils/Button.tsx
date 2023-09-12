@@ -1,14 +1,17 @@
 'use client'
 
+import { ChevronLeftIcon } from "@radix-ui/react-icons"
+
 type ButtonColor = "purple" | "blue" | "dark-1" | "red"
 
 interface ButtonProps {
     color?: ButtonColor
     text: string
+    hasLeftIcon?: boolean
 }
 
 export default function Button(props: ButtonProps){
-    let { color='purple', text } = props;
+    let { color='purple', text, hasLeftIcon=false } = props;
 
     let colors = {
         'purple': 'bg-purple',
@@ -25,10 +28,15 @@ export default function Button(props: ButtonProps){
     }
     return (
         <button 
-            className={`${colors[color]} ${hoverColors[color]} color-[#FFFFFF] w-[158px] font-bold text-[0.875rem] leading-[1.25rem] rounded-[0.625rem] py-[12px]`} 
+            className={`flex items-center gap-[0.9rem] justify-center ${colors[color]} ${hoverColors[color]} color-[#FFFFFF] w-[158px] font-bold text-[0.875rem] leading-[1.25rem] rounded-[0.625rem] py-[12px] capitalize`} 
             onClick={() => console.log('milk')}
         >
-            {props.text}
+            { hasLeftIcon &&
+                <ChevronLeftIcon/>
+            }
+            <span>
+                {props.text}
+            </span>
         </button>
     );
 }
