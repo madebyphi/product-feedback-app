@@ -23,7 +23,8 @@ const config: Config = {
         'dark-1': '#3A4374',
         'dark-2': '#4661E6',
         'orange': '#F49F85',
-        'cyan': '#62BCFA'
+        'cyan': '#62BCFA',
+        'red': '#D73737'
       },
     },
   },
