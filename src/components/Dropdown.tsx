@@ -15,14 +15,16 @@ import {
 
 interface DropdownProps {
   items: Array<string>;
+  placeholder?: string;
+  defaultValue?: string;
 }
 
 export function Dropdown(props: DropdownProps) {
-  const { items } = props;
+  const { items, placeholder, defaultValue } = props;
   return (
-    <Select>
+    <Select defaultValue={defaultValue}>
       <SelectTrigger className="w-[180px] text-dark-1 rounded-[0.3125rem] ">
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
