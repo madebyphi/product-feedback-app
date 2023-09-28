@@ -43,7 +43,7 @@ module.exports = {
         "gray-2": "#F2F4FF",
         "gray-3": "#647196",
         "dark-1": "#3A4374",
-        "dark-2": "#4661E6",
+        "dark-2": "#373F68",
         orange: "#F49F85",
         cyan: "#62BCFA",
         red: "#D73737",
