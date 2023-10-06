@@ -2,22 +2,21 @@ import { useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
 import Text from "@/components/Text";
 
-const categories = [
-  "All",
+export const categories = [
+  "all",
   "UI",
   "UX",
-  "Enhancement",
-  "Bug",
-  "Feature",
+  "enhancement",
+  "bug",
+  "feature",
 ] as const;
 
+export type Category = (typeof categories)[number];
+
 export default function CategoryCard() {
-  type SelectedCategory = (typeof categories)[number];
+  const [selectedCategory, setSelectedCategory] = useState<Category>("all");
 
-  const [selectedCategory, setSelectedCategory] =
-    useState<SelectedCategory>("All");
-
-  const handlePress = (pressed: boolean, category: SelectedCategory) => {
+  const handlePress = (pressed: boolean, category: Category) => {
     setSelectedCategory(category);
   };
 
@@ -26,7 +25,7 @@ export default function CategoryCard() {
       {categories.map((category) => (
         <Toggle
           key={category}
-          className="bg-gray-2 text-blue hover:bg-[#CFD7FF] hover:text-blue data-[state=on]:bg-blue data-[state=on]:text-white font-semibold rounded-[0.625rem] px-[1rem] py-[0.375rem]"
+          className="bg-gray-2 text-blue hover:bg-[#CFD7FF] hover:text-blue data-[state=on]:bg-blue data-[state=on]:text-white font-semibold rounded-[0.625rem] px-[1rem] py-[0.375rem] capitalize"
           onPressedChange={(pressed) => handlePress(pressed, category)}
           pressed={selectedCategory === category}
         >
