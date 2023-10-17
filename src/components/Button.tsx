@@ -50,7 +50,7 @@ export default function Button(
   if (true) {
     return (
       <Btn
-        className={`${colors[color]} ${hoverColors[color]} color-[#FFFFFF] w-[158px] font-bold text-[0.875rem] leading-[1.25rem] rounded-[0.625rem] py-[12px] capitalize cursor-pointer`}
+        className={`${colors[color]} ${hoverColors[color]} color-[#FFFFFF] font-bold text-[0.875rem] leading-[1.25rem] rounded-[0.625rem] px-[1rem] py-[10.5px] md:px-[1.5rem] md:py-[12px] capitalize cursor-pointer`}
       >
         {hasLeftIcon && <Icon />}
         {text}
