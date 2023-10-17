@@ -25,9 +25,9 @@ const options = [
 
 export default function FeedbackBar() {
   return (
-    <div className="flex items-center bg-dark-1 w-full md:rounded-[0.625rem] pl-[2rem] py-[0.875rem] pr-[1rem] justify-between">
+    <div className="flex items-center bg-dark-1 w-full md:rounded-[0.625rem] pl-[1.5rem] py-[0.875rem] pr-[1rem] justify-between">
       <div className="flex gap-[2.375rem] items-center">
-        <div className="flex gap-[1rem]">
+        <div className="hidden md:flex gap-[1rem]">
           {/* <AwardIcon /> */}
           <Svg name="suggestions" />
           <Text as="H3" content={`6 Suggestions`} />
