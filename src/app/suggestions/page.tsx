@@ -33,7 +33,7 @@ export default function Suggestions() {
   const db = JSON.parse(data);
   console.log(db);
   return (
-    <div className="flex justify-center bg-gray-1 md:pt-[5.875rem] md:pb-[8rem]  ">
+    <div className="flex justify-center bg-gray-1 pb-[55px] md:pt-[5.875rem] md:pb-[8rem] h-full  ">
       <div className="px-0 lg:w-[1110px] md:w-[700px] w-full flex gap-[1.875rem] lg:flex-row lg:px-[3rem] md:flex-col flex-col">
         {/*Left Column*/}
         <aside className="lg:w-[15.9375rem] flex lg:flex-col lg:gap-[2rem] md:gap-[0.675rem] w-full md:flex-row flex-col absolute md:relative h-full">
@@ -57,10 +57,12 @@ export default function Suggestions() {
         {/* Right Column */}
         <div className="lg:w-[51.5625rem] flex flex-col gap-[1.5rem] w-full mt-[4.5rem] md:mt-0">
           <FeedbackBar />
-          <div className="flex flex-col gap-[1.25rem]">
-            {db.productRequests.map((suggestion: ProductRequest) => (
-              <SuggestionCard key={suggestion.id} suggestion={suggestion} />
-            ))}
+          <div className="px-[1.5rem] md:px-0">
+            <div className="flex flex-col gap-[1.25rem]">
+              {db.productRequests.map((suggestion: ProductRequest) => (
+                <SuggestionCard key={suggestion.id} suggestion={suggestion} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
