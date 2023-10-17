@@ -15,7 +15,7 @@ export default function Text(props: TextProps) {
     <>
       {as === "H1" && (
         <h1
-          className={`font-bold text-[1.5rem] tracking-[-0.0125em] leading-[2.1875rem]`}
+          className={`${classes} font-bold text-[1.5rem] tracking-[-0.0125em] leading-[2.1875rem]`}
         >
           {content}
         </h1>
