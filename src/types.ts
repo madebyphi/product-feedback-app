@@ -15,11 +15,11 @@ export interface Comment {
 }
 
 export interface ProductRequest {
-  id: number;
-  title: string;
-  description: string;
-  category: Category;
-  status: Status;
-  upvotes: number;
-  comments: Comment[],
+  id?: number;
+  title?: string;
+  description?: string;
+  category?: Category;
+  status?: Status;
+  upvotes?: number;
+  comments?: Comment[],
 };
