@@ -10,3 +10,18 @@ export async function GET(req: Request, res: Response) {
   //Return the content of the data file in json format
   return NextResponse.json(fileContents);
 }
+
+export async function POST() {
+  const res = await fetch('https://data.mongodb-api.com/...', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'API-Key': process.env.DATA_API_KEY,
+    } as HeadersInit,
+    body: JSON.stringify({ time: new Date().toISOString() }),
+  })
+
+  const data = await res.json()
+
+  return Response.json(data)
+}
