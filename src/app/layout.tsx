@@ -1,3 +1,4 @@
+import Providers from "@/hooks/Provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={`${jost.className} bg-gray-1`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
