@@ -31,12 +31,10 @@ export function Dropdown(props: DropdownProps) {
           {/* <SelectLabel>Fruits</SelectLabel> */}
           {items.map((item: string, index: number, arr) => {
             return (
-              <>
-                <SelectItem value={item} key={item}>
-                  {item}
-                </SelectItem>
+              <React.Fragment key={item}>
+                <SelectItem value={item}>{item}</SelectItem>
                 {arr.length > index + 1 && <SelectSeparator />}
-              </>
+              </React.Fragment>
             );
           })}
           {/* <SelectItem value="apple">Apple</SelectItem>
