@@ -11,7 +11,10 @@ export default function SuggestionCard(props: { suggestion: ProductRequest }) {
   return (
     <div className="flex flex-col sm:flex-row bg-white px-[2rem] py-[1.75rem] rounded-[0.625rem] justify-between gap-[1rem] sm:gap-0">
       <div className="flex gap-[2.5rem]">
-        <Toggle className="hidden sm:flex flex-col h-auto self-start gap-[0.5rem] bg-gray-2 [&>p]:text-dark-1 [&>svg]:stroke-blue hover:bg-[#CFD7FF] data-[state=on]:bg-blue [&>p]:data-[state=on]:text-white [&>svg]:data-[state=on]:stroke-white font-semibold rounded-[0.625rem] px-[0.6875rem] pb-[0.5rem] pt-[0.875rem]">
+        <Toggle
+          onClick={(e) => e.stopPropagation()}
+          className="hidden sm:flex flex-col h-auto self-start gap-[0.5rem] bg-gray-2 [&>p]:text-dark-1 [&>svg]:stroke-blue hover:bg-[#CFD7FF] data-[state=on]:bg-blue [&>p]:data-[state=on]:text-white [&>svg]:data-[state=on]:stroke-white font-semibold rounded-[0.625rem] px-[0.6875rem] pb-[0.5rem] pt-[0.875rem]"
+        >
           {/* <ChevronUp /> */}
           <Svg name="up-arrow" className="shrink-0" />
           <p className="font-bold text-[0.8125rem] leading-[1.1875rem] tracking-[-0.01125rem]">
