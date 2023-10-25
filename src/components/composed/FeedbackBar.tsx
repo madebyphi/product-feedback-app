@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 
 import { Svg } from "@/components/Svg";
+import { useRouter } from "next/navigation";
 
 const options = [
   "Most Upvotes",
@@ -24,6 +25,8 @@ const options = [
 ];
 
 export default function FeedbackBar() {
+  const router = useRouter();
+
   return (
     <div className="flex items-center bg-dark-1 w-full md:rounded-[0.625rem] pl-[1.5rem] py-[0.875rem] pr-[1rem] justify-between">
       <div className="flex gap-[2.375rem] items-center">
@@ -63,7 +66,10 @@ export default function FeedbackBar() {
           </Select>
         </div>
       </div>
-      <Button text="+ Add Feedback" />
+      <Button
+        text="+ Add Feedback"
+        onClick={() => router.push("/new-feedback")}
+      />
     </div>
   );
 }

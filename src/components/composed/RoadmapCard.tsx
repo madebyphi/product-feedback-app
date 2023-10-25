@@ -1,12 +1,17 @@
 import Text from "@/components/Text";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function RoadmapCard() {
+  const router = useRouter();
   return (
     <div className="flex flex-col gap-y-[1.5rem] bg-white rounded-[0.625rem] px-[1.5rem] pb-[1.5rem] pt-[1.1875rem] grow basis-0">
       <div className="flex flex-row items-center justify-between">
         <Text as="H3" content="Roadmap" classes="text-dark-1" />
-        <Button className="bg-transparent hover:bg-transparent focus:bg-transparent underline text-blue p-0">
+        <Button
+          onClick={() => router.push("/roadmap")}
+          className="bg-transparent hover:bg-transparent focus:bg-transparent underline text-blue p-0"
+        >
           View
         </Button>
       </div>
