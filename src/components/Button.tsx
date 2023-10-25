@@ -12,6 +12,8 @@ interface CommonButtonProps {
   color?: ButtonColor;
   text: string;
   as?: As;
+  className?: string;
+  onClick?: () => void;
 }
 
 type HasIconProps = CommonButtonProps & {
@@ -31,6 +33,8 @@ export default function Button(
     hasLeftIcon = false,
     as = "button",
     Icon = ChevronDown,
+    className,
+    onClick,
   } = props;
 
   let colors = {
@@ -47,37 +51,29 @@ export default function Button(
     red: "hover:bg-[#E98888]",
   };
 
-  if (true) {
+  if (as === "link") {
     return (
       <Btn
-        className={`${colors[color]} ${hoverColors[color]} color-[#FFFFFF] font-bold text-[0.875rem] leading-[1.25rem] rounded-[0.625rem] px-[1rem] py-[10.5px] md:px-[1.5rem] md:py-[12px] capitalize cursor-pointer`}
+        onClick={onClick}
+        className={`flex items-center justify-center gap-[0.9rem] p-0 cursor-pointer bg-transparent active:bg-transparent hover:bg-transparent focus:bg-transparent`}
       >
-        {hasLeftIcon && <Icon />}
-        {text}
+        {hasLeftIcon && <ChevronLeftIcon color="#4661E6" />}
+        <span
+          className={`${className} font-bold text-[0.875rem] leading-[1.25rem] capitalize hover:underline`}
+        >
+          {props.text}
+        </span>
       </Btn>
     );
   }
 
-  if (as === "link") {
-    return (
-      <button
-        className={`flex items-center justify-center gap-[0.9rem] p-0 cursor-pointer`}
-      >
-        {hasLeftIcon && <ChevronLeftIcon color="#4661E6" />}
-        <span className="color-gray-3 font-bold text-[0.875rem] leading-[1.25rem] capitalize hover:underline">
-          {props.text}
-        </span>
-      </button>
-    );
-  }
-
   return (
-    <button
-      className={`flex items-center gap-[0.9rem] justify-center ${colors[color]} ${hoverColors[color]} color-[#FFFFFF] w-[158px] font-bold text-[0.875rem] leading-[1.25rem] rounded-[0.625rem] py-[12px] capitalize cursor-pointer`}
-      onClick={() => console.log("milk")}
+    <Btn
+      onClick={onClick}
+      className={`${colors[color]} ${hoverColors[color]} color-[#FFFFFF] font-bold text-[0.875rem] leading-[1.25rem] rounded-[0.625rem] px-[1rem] py-[10.5px] md:px-[1.5rem] md:py-[12px] capitalize cursor-pointer`}
     >
-      {hasLeftIcon && <ChevronLeftIcon />}
-      <span>{props.text}</span>
-    </button>
+      {hasLeftIcon && <Icon />}
+      {text}
+    </Btn>
   );
 }
