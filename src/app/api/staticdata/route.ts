@@ -8,7 +8,8 @@ export async function GET(req: Request, res: Response) {
   //Read the json data file data.json
   const fileContents = await fs.readFile(jsonDirectory + "/data.json", "utf8");
   //Return the content of the data file in json format
-  return NextResponse.json(fileContents);
+  const data = await JSON.parse(fileContents)
+  return NextResponse.json(data);
 }
 
 export async function POST() {
