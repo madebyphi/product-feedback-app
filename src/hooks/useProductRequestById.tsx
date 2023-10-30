@@ -1,19 +1,15 @@
 import { ProductRequest } from "@/types";
-import { useQuery } from "react-query";
+import { useProductRequests } from "./useProductRequests";
 
-const fetchProductRequestsById = async () =>
+const fetchProductRequests = async () =>
   await fetch("/api/staticdata").then((res) => res.json());
 
 export const useProductRequestsById = (id: string) => {
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["productRequest"],
-    queryFn: () => fetchProductRequestsById(),
-  });
+  const { data, error, isLoading } = useProductRequests();
 
-  let productRequest: ProductRequest = {};
-  if (!isLoading && !error) {
-    // console.log("now", isLoading, error, JSON.parse(data));
-    productRequest = JSON.parse(data).productRequests.find(
+  let productRequest = null;
+  if (!isLoading && !error && id) {
+    productRequest = data.productRequests.find(
       (item: any) => item.id.toString() === id
     );
   }
