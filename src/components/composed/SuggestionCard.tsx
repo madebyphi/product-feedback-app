@@ -30,7 +30,7 @@ export default function SuggestionCard(props: { suggestion: ProductRequest }) {
               {suggestion.description}
             </p>
           </div>
-          <div className="bg-gray-2 text-blue hover:bg-[#CFD7FF] hover:text-blue data-[state=on]:bg-blue data-[state=on]:text-white font-semibold rounded-[0.625rem] px-[1rem] py-[0.375rem] self-start capitalize">
+          <div className="bg-gray-2 text-blue font-semibold rounded-[0.625rem] px-[1rem] py-[0.375rem] self-start capitalize">
             <Text as="Body 3" content={suggestion.category} />
           </div>
         </div>
