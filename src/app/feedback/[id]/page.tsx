@@ -17,6 +17,7 @@ import Link from "next/link";
 import Spacer from "@/components/Spacer";
 import { useProductRequestsById } from "@/hooks/useProductRequestById";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 interface CommentReply {
   content: string;
@@ -39,11 +40,22 @@ interface Comment {
   replies?: CommentReply[];
 }
 
+const ReplyBox: React.FC = () => {
+  return (
+    <div className="flex gap-[1rem]">
+      <Textarea className="rounded-[0.3125rem] text-dark-1" maxLength={250} />
+      <Button color="purple" text="Post Reply" className="shrink-0" />
+    </div>
+  );
+};
+
 const CommentReply: React.FC<{
   commentReply: CommentReply;
   numberOfCommentReplies: number;
   commentReplyIndex: number;
 }> = ({ commentReply, commentReplyIndex, numberOfCommentReplies }) => {
+  const [showReplyBox, setShowReplyBox] = useState(false);
+
   return (
     <React.Fragment key={commentReplyIndex}>
       <div className="flex justify-start">
@@ -69,14 +81,26 @@ const CommentReply: React.FC<{
                 </p>
               </div>
               {/* reply button */}
-              <Button as="link" text="Reply" className="text-blue" />
+              <Button
+                as="link"
+                text="Reply"
+                className="text-blue"
+                onClick={() => setShowReplyBox(!showReplyBox)}
+              />
             </div>
           </div>
           <div className="flex w-full gap-[32px]">
+            {/* Spacer */}
             <div className=" h-[40px] w-[40px] shrink-0 hidden md:inline-block"></div>
-            <p className="text-gray-3 text-[13px] leading-[19px] sm:text-[15px] sm:leading-[22px]">
-              {commentReply.content}
-            </p>
+            <div className="flex flex-col gap-[1.5rem]">
+              <p className="text-gray-3 text-[13px] leading-[19px] sm:text-[15px] sm:leading-[22px]">
+                <span className="text-purple font-bold">
+                  @{commentReply?.replyingTo}{" "}
+                </span>
+                {commentReply.content}
+              </p>
+              {showReplyBox && <ReplyBox />}
+            </div>
           </div>
         </div>
       </div>
@@ -97,6 +121,7 @@ const Comment: React.FC<{
   numberOfComments: number;
   commentIndex: number;
 }> = ({ comment, numberOfComments, commentIndex }) => {
+  const [showReplyBox, setShowReplyBox] = useState(false);
   return (
     <React.Fragment>
       <div className="flex flex-col gap-[17px]">
@@ -114,7 +139,12 @@ const Comment: React.FC<{
               </p>
             </div>
             {/* reply button */}
-            <Button as="link" text="Reply" className="text-blue" />
+            <Button
+              as="link"
+              text="Reply"
+              className="text-blue"
+              onClick={() => setShowReplyBox(!showReplyBox)}
+            />
           </div>
         </div>
         <div className="flex w-full">
@@ -128,15 +158,14 @@ const Comment: React.FC<{
           <div className=" h-[40px] w-[40px] shrink-0 hidden md:inline-block"></div>
           {/* Spacer */}
           <div className="hidden md:block w-[11px] shrink-0"></div>
-          {/* <Spacer axis="horizontal" size={31 - 20} /> */}
-          <p className="text-gray-3 text-[13px] leading-[19px] sm:text-[15px] sm:leading-[22px]">
-            {comment.content}
-          </p>
+          <div className="flex flex-col gap-[1.5rem]">
+            <p className="text-gray-3 text-[0.8125rem] leading-[1.1875rem] sm:text-[0.9375rem] sm:leading-[1.375rem]">
+              {comment.content}
+            </p>
+            {showReplyBox && <ReplyBox />}
+          </div>
         </div>
       </div>
-      {numberOfComments > commentIndex + 1 && (
-        <div className="h-[1px] w-full bg-[#8C92B3]/[.25] my-[32px]" />
-      )}
       {comment.replies && (
         <div className="flex flex-col">
           <Spacer
@@ -154,11 +183,15 @@ const Comment: React.FC<{
           ))}
         </div>
       )}
+      {numberOfComments > commentIndex + 1 && (
+        <div className="h-[1px] w-full bg-[#8C92B3]/[.25] my-[32px]" />
+      )}
     </React.Fragment>
   );
 };
 
 export default function Feedback({ params }: { params: { id: string } }) {
+  const [newCommentValue, setNewCommentValue] = useState("");
   const router = useRouter();
   const { data, error, isLoading } = useProductRequestsById(params.id);
   //Handle the error state
@@ -168,9 +201,6 @@ export default function Feedback({ params }: { params: { id: string } }) {
   //Handle the loading state
   if (isLoading) return <div>Loading...</div>;
 
-  // const db = JSON.parse(data);
-  const pageInfo: ProductRequest = data;
-  // console.log(db);
   return (
     <div className="flex justify-center bg-gray-1 pb-[55px] pt-[2.125rem] md:pt-[5.875rem] md:pb-[8rem] h-full">
       <div className="flex flex-col items-center px-[1.5rem] md:px-0 w-full md:w-[689px] lg:w-[730px] gap-[1.5rem]">
@@ -188,29 +218,55 @@ export default function Feedback({ params }: { params: { id: string } }) {
           <Button
             text="Edit Feedback"
             color="blue"
-            onClick={() => router.push("/edit-feedback")}
+            onClick={() =>
+              router.push(
+                `/edit-feedback?${new URLSearchParams({ id: params.id })}`
+              )
+            }
           />
         </div>
         <div className="w-full">
-          <SuggestionCard key={pageInfo.id} suggestion={pageInfo} />
+          <SuggestionCard key={data.id} suggestion={data} />
         </div>
         <div className="flex flex-col bg-white px-[2rem] py-[1.75rem] rounded-[0.625rem] justify-between w-full">
           {/* Title */}
           <h3 className="font-bold text-[1.125rem] tracking-[-0.01375em] leading-[1.625rem] text-dark-1">
-            {pageInfo?.comments?.length || 0} Comments
+            {data?.comments?.length || 0} Comments
           </h3>
           <Spacer axis="vertical" size={28} />
           {/* Comment */}
           <div className="flex flex-col">
-            {pageInfo.comments &&
-              pageInfo.comments.map((comment: any, index: number) => (
+            {data.comments &&
+              data.comments.map((comment: any, index: number) => (
                 <Comment
                   key={comment.id}
                   comment={comment}
                   commentIndex={index}
-                  numberOfComments={pageInfo.comments!.length}
+                  numberOfComments={data.comments!.length}
                 />
               ))}
+          </div>
+        </div>
+        <div className="flex flex-col bg-white px-[2rem] py-[1.75rem] rounded-[0.625rem] justify-between w-full">
+          {/* Title */}
+          <h3 className="font-bold text-[1.125rem] tracking-[-0.01375em] leading-[1.625rem] text-dark-1">
+            Add Comment
+          </h3>
+          <Spacer axis="vertical" size={24} />
+          {/* Comment */}
+          <div className="flex flex-col gap-[1rem]">
+            <Textarea
+              className="rounded-[0.3125rem] text-dark-1"
+              maxLength={250}
+              value={newCommentValue}
+              onChange={(e) => setNewCommentValue(e.target.value)}
+            />
+            <div className="flex items-center justify-between">
+              <p className="font-normal text-gray-3 text-[0.9375rem] leading-[1.375rem] tracking-[0rem]">
+                {250 - newCommentValue.length} characters left
+              </p>
+              <Button text="Post Comment" />
+            </div>
           </div>
         </div>
       </div>

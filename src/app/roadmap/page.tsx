@@ -16,7 +16,6 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import { Toggle } from "@/components/ui/toggle";
 import Spacer from "@/components/Spacer";
-import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useProductRequests } from "@/hooks/useProductRequests";
 import { cn } from "@/lib/utils";
