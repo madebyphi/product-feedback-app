@@ -31,7 +31,9 @@ export default function FeedbackBar() {
         <div className="hidden md:flex gap-[1rem]">
           {/* <AwardIcon /> */}
           <Svg name="suggestions" />
-          <p className="text-white font-bold text-[1.125rem] tracking-[-0.01375em] leading-[1.625rem]"></p>
+          <p className="text-white font-bold text-[1.125rem] tracking-[-0.01375em] leading-[1.625rem]">
+            12 Suggestions
+          </p>
         </div>
         {/* <Dropdown items={options} placeholder="change this" /> */}
         <div className="flex items-center gap-[0.3rem]">
