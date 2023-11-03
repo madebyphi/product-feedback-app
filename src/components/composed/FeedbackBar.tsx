@@ -1,7 +1,5 @@
 import { Fragment } from "react";
 import Button from "@/components/Button";
-import { Dropdown } from "@/components/Dropdown";
-import Text from "@/components/Text";
 
 import {
   Select,
@@ -33,20 +31,20 @@ export default function FeedbackBar() {
         <div className="hidden md:flex gap-[1rem]">
           {/* <AwardIcon /> */}
           <Svg name="suggestions" />
-          <Text as="H3" content={`6 Suggestions`} />
+          <p className="text-white font-bold text-[1.125rem] tracking-[-0.01375em] leading-[1.625rem]"></p>
         </div>
         {/* <Dropdown items={options} placeholder="change this" /> */}
         <div className="flex items-center gap-[0.3rem]">
           <p
             id="sort-label"
-            className="font-normal text-[0.875rem] leading-[1.25rem]"
+            className="font-normal text-white text-[0.875rem] leading-[1.25rem]"
           >
             Sort by :
           </p>
           <Select defaultValue={"Most Upvotes"}>
             <SelectTrigger
               aria-labelledby="sort-label"
-              className="w-[7rem]  font-bold rounded-[0.3125rem] bg-transparent border-0 px-0 text-[0.875rem] leading-[1.25rem]"
+              className="w-[7rem] text-white font-bold rounded-[0.3125rem] bg-transparent border-0 px-0 text-[0.875rem] leading-[1.25rem]"
             >
               <SelectValue placeholder={"Most Upvotes"} />
             </SelectTrigger>

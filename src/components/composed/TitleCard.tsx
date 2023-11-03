@@ -21,7 +21,7 @@ export default function TitleCard(props: TitleCardProps) {
       <div className="bg-[#7AD8FA] absolute rounded-full h-[12rem] w-[12rem] blur-2xl left-[-50%] top-[-70%]"></div>
       <div className="relative flex flex-row  w-full justify-between md:absolute md:bottom-[1.5rem]">
         <span>
-          <h2 className="text-[0.9375rem] leading-[1.375rem] font-medium md:font-bold md:text-[1.25rem] md:tracking-[-0.01375em] md:leading-[1.8125rem]">
+          <h2 className="text-white text-[0.9375rem] leading-[1.375rem] font-medium md:font-bold md:text-[1.25rem] md:tracking-[-0.01375em] md:leading-[1.8125rem]">
             Frontend Mentor
           </h2>
           <p className="text-[0.8125rem] leading-[1.1875rem] font-medium text-white/[.75] md:font-normal md:text-[0.9375rem] md:leading-[1.375rem]">
